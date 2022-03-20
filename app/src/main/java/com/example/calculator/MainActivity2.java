@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity2 extends AppCompatActivity implements View.OnClickListener{
 
     TextView firstNumber;
     TextView sign;
@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button seven;
     Button eight;
     Button nine;
-    Button plus;
-    Button minus;
-    Button multiply;
-    Button divide;
+    Button expon;
+    Button root;
+    Button sin;
+    Button cos;
     Button clear;
     Button equals;
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
         act = "";
         fnum = true;
@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seven = findViewById(R.id.seven);
         eight = findViewById(R.id.eight);
         nine = findViewById(R.id.nine);
-        plus = findViewById(R.id.plus);
-        minus = findViewById(R.id.minus);
-        multiply = findViewById(R.id.multiply);
-        divide = findViewById(R.id.divide);
+        expon = findViewById(R.id.expon);
+        root = findViewById(R.id.root);
+        sin = findViewById(R.id.sin);
+        cos = findViewById(R.id.cos);
         clear = findViewById(R.id.clear);
         equals = findViewById(R.id.equals);
         transition = findViewById(R.id.transition);
@@ -88,15 +88,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seven.setOnClickListener(this);
         eight.setOnClickListener(this);
         nine.setOnClickListener(this);
-        plus.setOnClickListener(this);
-        minus.setOnClickListener(this);
-        multiply.setOnClickListener(this);
-        divide.setOnClickListener(this);
+        expon.setOnClickListener(this);
+        root.setOnClickListener(this);
+        sin.setOnClickListener(this);
+        cos.setOnClickListener(this);
         clear.setOnClickListener(this);
         equals.setOnClickListener(this);
         transition.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fnum = false;
                 break;
             case R.id.transition:
-                Intent intent = new Intent(this, MainActivity2.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.zero:
@@ -135,15 +133,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     secondNumber.setText(numText);
                 }
                 break;
-            case R.id.plus:
-            case R.id.minus:
-            case R.id.multiply:
-            case R.id.divide:
+            case R.id.expon:
+            case R.id.root:
+            case R.id.sin:
+            case R.id.cos:
                 Button button1 = (Button) view;
                 act = button1.getText().toString();
                 sign.setText(act);
-                fnum = false;
-
+                if (act.equals("^"))
+                {
+                    secondNumber.setVisibility(View.VISIBLE);
+                    fnum = false;
+                }
+                if (act.equals("√"))
+                {
+                    secondNumber.setVisibility(View.VISIBLE);
+                    fnum = false;
+                }
+                if (act.equals("sin")) fnum = true;
+                if (act.equals("cos")) fnum = true;
                 break;
             case R.id.clear:
                 firstNumber.setText("");
@@ -154,40 +162,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fnum = true;
                 break;
             case R.id.equals:
-               String checkFirst = firstNumber.getText().toString();
-               String checkSecond = secondNumber.getText().toString();
+                String checkFirst = firstNumber.getText().toString();
+                String checkSecond = secondNumber.getText().toString();
                 if (checkFirst.equals("")) firstNumber.setText("0");
                 if (checkSecond.equals("")) secondNumber.setText("0");
-                float num1 = Float.valueOf(firstNumber.getText().toString());
-                float num2 = Float.valueOf(secondNumber.getText().toString());
-                float res;
+                double num1 = Double.valueOf(firstNumber.getText().toString());
+                double num2 = Double.valueOf(secondNumber.getText().toString());
+                double res;
 
-                if (act.equals("+"))
+                if (act.equals("^"))
                 {
-                    res = num1 + num2;
+                    res = Math.pow(num1, num2);
                     result.setText(String.valueOf(res));
                     eq.setText("=");
                 }
-                if (act.equals("-"))
+                if (act.equals("√"))
                 {
-                    res = num1 - num2;
+                    res = Math.pow(num1, 1/num2);
                     result.setText(String.valueOf(res));
                     eq.setText("=");
                 }
-                if (act.equals("*"))
+                if (act.equals("sin"))
                 {
-                    res = num1 * num2;
+                    res = Math.sin(Math.toRadians(num1));
                     result.setText(String.valueOf(res));
                     eq.setText("=");
                 }
-                if (act.equals("/"))
+                if (act.equals("cos"))
                 {
-                    res = num1 / num2;
+                    res = Math.cos(Math.toRadians(num1));
                     result.setText(String.valueOf(res));
                     eq.setText("=");
                 }
-
-
                 break;
         }
     }

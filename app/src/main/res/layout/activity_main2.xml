@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity2">
+
 
     <TextView
         android:id="@+id/firstNumber"
@@ -39,6 +40,7 @@
         android:background="@color/white"
         android:textSize="24sp"
         android:gravity="center"
+        android:visibility="invisible"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toTopOf="@id/buttonTable"
         app:layout_constraintEnd_toStartOf="@id/eq"
@@ -119,14 +121,14 @@
                 android:textSize="24sp" />
 
             <android.widget.Button
-                android:id="@+id/plus"
+                android:id="@+id/expon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="+"
+                android:text="^"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
         </TableRow>
@@ -170,14 +172,14 @@
                 android:textSize="24sp" />
 
             <android.widget.Button
-                android:id="@+id/minus"
+                android:id="@+id/root"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="-"
+                android:text="√"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
         </TableRow>
@@ -221,14 +223,14 @@
                 android:textSize="24sp" />
 
             <android.widget.Button
-                android:id="@+id/multiply"
+                android:id="@+id/sin"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="*"
+                android:text="sin"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
         </TableRow>
@@ -274,14 +276,14 @@
                 android:textSize="16sp" />
 
             <android.widget.Button
-                android:id="@+id/divide"
+                android:id="@+id/cos"
                 android:layout_width="11dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="/"
+                android:text="cos"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
@@ -293,9 +295,9 @@
                 android:background="@drawable/button_background"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="->"
+                android:text="Back"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="16sp" />
         </TableRow>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
