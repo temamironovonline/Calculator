@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
@@ -15,6 +17,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     TextView secondNumber;
     TextView eq;
     TextView result;
+
+    String[] history = new String[5];
 
     Button zero;
     Button one;
@@ -47,11 +51,18 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         act = "";
         fnum = true;
 
+        ArrayAdapter<String> mathHistory = new ArrayAdapter<String>(MainActivity2.this, android.R.layout.simple_spinner_item, history);
+        mathHistory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spHistory = (Spinner) findViewById(R.id.spHistory);
+        spHistory.setAdapter(mathHistory);
+
         firstNumber = findViewById(R.id.firstNumber);
         sign = findViewById(R.id.sign);
         secondNumber = findViewById(R.id.secondNumber);
         eq = findViewById(R.id.eq);
         result = findViewById(R.id.result);
+
+
 
         firstNumber.setOnClickListener(this);
         secondNumber.setOnClickListener(this);
@@ -168,7 +179,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                 if (checkSecond.equals("")) secondNumber.setText("0");
                 double num1 = Double.valueOf(firstNumber.getText().toString());
                 double num2 = Double.valueOf(secondNumber.getText().toString());
-                double res;
+                double res = 0;
 
                 if (act.equals("^"))
                 {
@@ -194,6 +205,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                     result.setText(String.valueOf(res));
                     eq.setText("=");
                 }
+
+                for (int i = 3; i >= 0; i--)
+                {
+                    history[i+1] = history[i];
+                }
+                history[0] = String.valueOf(res);
                 break;
         }
     }

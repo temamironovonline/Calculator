@@ -2,8 +2,11 @@ package com.example.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
@@ -15,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView secondNumber;
     TextView eq;
     TextView result;
+
+    String[] history = new String[5];
 
     Button zero;
     Button one;
@@ -46,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         act = "";
         fnum = true;
+
+        ArrayAdapter<String> mathHistory = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, history);
+        mathHistory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spHistory = (Spinner) findViewById(R.id.spHistory);
+        spHistory.setAdapter(mathHistory);
 
         firstNumber = findViewById(R.id.firstNumber);
         sign = findViewById(R.id.sign);
@@ -160,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (checkSecond.equals("")) secondNumber.setText("0");
                 float num1 = Float.valueOf(firstNumber.getText().toString());
                 float num2 = Float.valueOf(secondNumber.getText().toString());
-                float res;
+                float res = 0;
 
                 if (act.equals("+"))
                 {
@@ -187,7 +197,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     eq.setText("=");
                 }
 
-
+                for (int i = 3; i >= 0; i--)
+                {
+                    history[i+1] = history[i];
+                }
+                history[0] = String.valueOf(res);
                 break;
         }
     }
